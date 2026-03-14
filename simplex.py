@@ -1,7 +1,3 @@
-import numpy as np
-import re
-from typing import Optional
-
 import re
 import numpy as np
 
@@ -89,205 +85,156 @@ def read_dades(num: int, prob: int, fitxer: str = "OPT25-26_Datos práctica 1.tx
 
 
 
+def fase_inicial(A: np.ndarray, b: np.ndarray):
+    """Troba una SBF inicial mitjançant el mètode de la fase I (variables artificials).
 
-
-"""
-
-def simplex(cost: np.array, A: np.array, b: np.array, inversa: Optional[np.array] = None, fase1: bool = None):
-    Performs the simplex algorithm.
+    Construeix el problema auxiliar:
+        min  sum(a_i)
+        s.a. [A | I] * [x; a] = b,  x,a >= 0
+    on a_i són m variables artificials amb cost 1 i la resta cost 0.
+    Resol el problema auxiliar amb simplex_proces partint de la base artificial I.
+    Si el mínim és 0 (dins tolerància), extreu la base factible original.
 
     Args:
-    - cost (numpy.ndarray): Cost coefficients for the linear program objective function.
-    - A (numpy.ndarray): Coefficients of the constraints matrix.
-    - b (numpy.ndarray): Values of the constraints.
-    - inversa (numpy.ndarray, optional): Inverse matrix. Defaults to None.
-    - fase1 (bool, optional): Indicates if it's the first phase of the simplex algorithm. Defaults to None.
+        A (np.ndarray): Matriu de restriccions (m x n) del problema original.
+        b (np.ndarray): Termes independents (m,). Han de ser >= 0.
 
     Returns:
-    - x (numpy.ndarray or None): Solution vector.
-    - z (float or str or None): Objective function value. None if infactible, No acotat if unbounded.
-    - basiques (list): Basic variables.
-    - inversa (numpy.ndarray or None): Inverse matrix.
-    - iteracio (int): Number of iterations.
+        basiques (list[int]): Índexs de les variables bàsiques de la SBF.
+        no_basiques (list[int]): Índexs de les variables no bàsiques.
+        inversa (np.ndarray): Inversa de la base B de la SBF.
+        factible (bool): True si s'ha trobat una SBF, False si el problema és infactible.
+    """
+    m, n = A.shape
 
-    with open ("output.txt", "a") as doc:
-        iteracio = 0
-        m = len(b)
-        n = len(A[0])
-        if(n < m):
-            return None, "Sistema incorrecte", [], None, None
-        no_basiques = [a for a in range(n-m)]
-        basiques = [a for a in range(n) if a not in no_basiques]
-        basiques_noves = None
-        if fase1 == None:
-            nova_A = np.hstack((A, np.eye(m))) # horizontal stack
-            nou_cost = np.array([0 for _ in range(n)] + [1 for _ in range(m)])
-            x_f1, z_f1, basiques_noves, inv, iteracions = simplex(nou_cost, nova_A, b, np.eye(m), fase1 = True)
-            inversa = inv
-            iteracio = iteracions + 1
-            if z_f1 in [None, "Infactible", "No acotat"] or np.round(z_f1,10) > 0:
-                    doc.write("No hi ha solucio factible\n\n")
-                    return None, "Infactible", [], None, iteracio
-            if min(x_f1) == 0 and basiques_noves[np.argmin(x_f1)] >= n:
-                # Cas en el que fase I acaba amb degeneració en una de les variables artificials.
-                """
-"""              Una alternativa és buscar qualsevol no bàsica amb cost reduït 0 i l'element de la
-                qual en la fila de la variable artificial sigui diferent a 0.
-                
-                marxa = basiques_noves[np.argmin(x_f1)]
-                basiques_per_iterar = [a for a in basiques if a not in basiques_noves]
-                for idx in basiques_per_iterar:
-                    try:
-                        basiques_temp = basiques_noves.copy()
-                        basiques_temp[np.argmin(x_f1)] = idx
-                        B = A[:,basiques_temp]
-                        inversa = np.linalg.inv(B)
-                        basiques_noves[np.argmin(x_f1)] = idx
-                        break
-                    except:
-                        continue
-                else:
-                    doc.write("SBF inicial contenia una variable artificial que no s'ha pogut treure.\n")
-                    cost = np.append(cost, (np.zeros(m)))
-                    z = np.dot(cost[basiques_noves], x_f1)
-                    doc.write(f"x = {x_f1}\nz* = {z}\nbasiques = {basiques_noves}\n\n")
-                    return x_f1, z, basiques_noves, None, iteracio
-            basiques = basiques_noves
-            no_basiques = [a for a in range(n) if a not in basiques]
-            doc.write("SBF inicial trobada.\n\n")
-            doc.write("Fase 2\n")
-        else:
-            doc.write("Fase 1\n")
-        cost_b = cost[basiques]
-        B_inv = inversa
-        x = np.dot(B_inv, b)
-        z = np.dot(cost_b, x)
+    # Garantim b >= 0 (multipliquem files negatives per -1)
+    A_aux = A.astype(float).copy()
+    b_aux = b.astype(float).copy()
+    for i in range(m):
+        if b_aux[i] < 0:
+            A_aux[i] *= -1
+            b_aux[i] *= -1
 
-        if m == n: # Si hi ha el mateix nombre de variables que restriccions, la SBF és la única
-            x = np.dot(np.linalg.inv(A), b)
-            z = np.dot(cost, x)
-            return x, z, basiques, None, iteracio
-        
-        while True:
-            degenerat = False
-            B = A[:,basiques]
-            A_n = A[:,no_basiques]
-            B_inv = inversa
-            cost_b = cost[basiques]
-            cost_n = cost[no_basiques]
-            if np.round(min(x),10) == 0:
-                doc.write("Solucio degenerada\n")
-                degenerat = True
-                pass
-            elif min(x) < 0:
-                return x, None, None, None, iteracio
-            
-            # és optim?
-            r = np.subtract(cost_n, np.dot(np.dot(cost_b, B_inv),A_n))
-            if min(r) < 0:
-                pass
-            elif min(r) > 0:
-                doc.write("Solucio optima trobada\n\n") if fase1 != True else doc.write("Fi Fase I\n\n")
-                doc.write(f"x = {x}\nz* = {z}\nbasiques = {basiques}\nr = {r}\n\n") if fase1 != True else doc.write(f"basiques = {basiques}\n\n")
-                doc.write(f"Nombre d'iteracions: {iteracio + 1}\n\n")
-                return x, z, basiques, inversa, iteracio
-            else:
-                doc.write("Una de les solucions optimes trobada\n\n") if fase1 != True else doc.write("Fi Fase I\n\n")
-                doc.write(f"x = {x}\nz* = {z}\nbasiques = {basiques}\nr = {r}\n\n") if fase1 != True else doc.write(f"basiques = {basiques}\n\n")
-                doc.write(f"Nombre d'iteracions: {iteracio + 1}\n\n")
-                return x, z, basiques, inversa, iteracio
-            for e in range(len(r)):
-                if r[e] < 0:
+    # Problema auxiliar: [A_aux | I_m], cost = [0,...,0, 1,...,1]
+    A_fase1 = np.hstack((A_aux, np.eye(m)))
+    cost_fase1 = np.array([0.0] * n + [1.0] * m)
+
+    # Base inicial: les m variables artificials (índexs n, n+1, ..., n+m-1)
+    basiques_f1 = list(range(n, n + m))
+    inversa_f1 = np.eye(m)
+
+    # Resol el problema auxiliar
+    x_f1, z_f1, bas_f1, inv_f1, _ = simplex_proces(
+        cost_fase1, A_fase1, b_aux, basiques_f1, inversa_f1
+    )
+
+    # Si z* > 0 (dins tolerància numèrica) → infactible
+    if z_f1 == "No acotat" or np.round(float(z_f1), 10) > 0:
+        return [], list(range(n)), None, False
+
+    # Elimina les variables artificials de la base si hi han quedat amb valor 0
+    basiques = list(bas_f1)
+    inversa = inv_f1.copy()
+    for pos, var in enumerate(basiques):
+        if var >= n:
+            # Variable artificial a la base amb valor 0 (degeneració)
+            # Intentem substituir-la per qualsevol variable original no bàsica
+            no_bas_orig = [j for j in range(n) if j not in basiques]
+            substituida = False
+            for j in no_bas_orig:
+                col = inversa @ A_aux[:, j]
+                if abs(col[pos]) > 1e-10:
+                    # Aplica el pivot per treure la variable artificial
+                    eta = np.eye(m)
+                    eta[:, pos] = [-col[i] / col[pos] if i != pos else 1.0 / col[pos]
+                                   for i in range(m)]
+                    inversa = eta @ inversa
+                    basiques[pos] = j
+                    substituida = True
                     break
-            entra = no_basiques[e]
-            # direcció bàsica factible
-            d_B = -np.dot(B_inv, A_n[:,e])
+            # Si no s'ha pogut substituir, la columna és linealment dependent;
+            # la variable artificial pot quedar (la fila és redundant).
 
-            if min(d_B) >= 0:
-                doc.write("Optim no acotat (raig)\n\n")
-                doc.write(f"basiques = {basiques}\ndB = {d_B}\n\n")
-                doc.write(f"Nombre d'iteracions: {iteracio + 1}\n\n")
-                return x, "No acotat", basiques, inversa, iteracio
-            # longitud de pas
-            theta, marxa = min([(np.divide((-x[i]),d_i), basiques[i]) for i, d_i in enumerate(d_B) if d_i < 0])
-
-            if degenerat and theta == 0:
-                
-                Aquest condicional està per la propietat ii de la diapositiva 30.
-                No vam acabar d'entendre exactament en quins casos es donava aquest
-                problema
-                
-                if max([np.divide((-x[i]),d_i) for i, d_i in enumerate(d_B) if d_i < 0]) == 0:
-                    # No hi ha cap theta > 0 (lo de la presentació?)
-                    # return x, "Infactible", basiques, None
-                    pass
-                else:
-                    pass
-                    
-
-            p = basiques.index(marxa)
-            basiques[p] = entra
-            no_basiques = [a for a in range(n) if a not in basiques] # Ordenades
-            doc.write(f"q = {entra}, out = {marxa}, p = {p}, theta = {theta}, z = {z}\n")
-            
-            # actualitzacions
-            transformacio = np.eye(m)
-            transformacio[:,p] = [np.divide((-d_B[i]), d_B[p]) if i!=p else np.divide((-1),d_B[p]) for i in range(m)]
-            inversa = np.dot(transformacio, B_inv)
-
-            x += np.dot(theta,d_B)
-            x[p] = theta
-
-            z += np.dot(r[e],theta)
-            iteracio += 1
-
-for alumne in range(1, 67):
-    for problema in range(1, 5):
-        print(f"Alumne {alumne}, problema {problema}")
-        c, A, b, z ,v = read_dades(alumne,problema)
-        with open ("output.txt", "a") as doc:
-            doc.write(f"Alumne {alumne}, problema {problema}\n")
-        a = simplex(c, A, b, None)
-        if z != None:
-            result = f"{a[1]:.4f}" == f"{z:.4f}"
-            print(result, f"{a[1]:.4f}")
-        else:
-            print(a[1])
-        print(f"Iteracions: {a[4]}")
+    no_basiques = sorted([j for j in range(n) if j not in basiques])
+    return basiques, no_basiques, inversa, True
 
 
-print("------------- \n Test \n --------------")
-with open ("output.txt", "a") as doc:
-    doc.write("------------------------------------------------------------------------------\n")
-    doc.write("                                 Test\n")
-    doc.write("------------------------------------------------------------------------------\n\n")
-for alumne in range(67, 71):
-    for problema in range(1, 5):
-        print(f"Alumne {alumne}, problema {problema}")
-        c, A, b, z ,v = read_dades(alumne,problema, fitxer="Datos_práctica_1_test.txt")
-        with open ("output.txt", "a") as doc:
-            doc.write(f"Alumne {alumne}, problema {problema}\n")
-        a = simplex(c, A, b, None)
-        print(a[1])
-Per comprovar:
+def simplex_proces(cost: np.ndarray, A: np.ndarray, b: np.ndarray,
+                   basiques: list, inversa: np.ndarray):
+    """Executa les iteracions del simplex primal amb la regla de Bland.
 
-from scipy.optimize import linprog
-r = linprog(c, A_eq = A, b_eq = b, method='highs')
-if r['status']==0:
-    if a[1] != None and a[1] != "?":
-        print(f"{r['fun']:.4f}", f"{a[1]:.4f}")
-    else:
-        print("a was none and r was ", r['fun'])
-elif r['status'] == 2:
-    print("infactible")
-    if a[1] == "Infactible":
-        print(True)
-    else:
-        print(False)
-elif r['status'] == 3:
-    print("raig")
-    if a[1] == "No acotat":
-        print(True)
-    else:
-        print(False)
-"""
+    Args:
+        cost (np.ndarray): Coeficients de cost.
+        A (np.ndarray): Matriu de restriccions (m x n).
+        b (np.ndarray): Termes independents.
+        basiques (list): Índexs de les variables bàsiques inicials.
+        inversa (np.ndarray): Inversa de la base B inicial.
+
+    Returns:
+        x (np.ndarray): Vector solució bàsica.
+        z (float | str): Valor de z* o 'No acotat'.
+        basiques (list): Variables bàsiques finals.
+        inversa (np.ndarray | None): Inversa de la base final.
+        iteracio (int): Nombre d'iteracions realitzades.
+    """
+    m, n = A.shape
+    basiques = list(basiques)
+    no_basiques = sorted([j for j in range(n) if j not in basiques])
+    B_inv = inversa.copy()
+
+    # Solució bàsica inicial i valor de la funció objectiu
+    x = B_inv @ b
+    z = float(cost[basiques] @ x)
+    iteracio = 0
+
+    while True:
+        cost_b = cost[basiques]
+        cost_n = cost[no_basiques]
+
+        # Pas 2: costos reduïts  r' = C_N - C_B * B^{-1} * A_N
+        r = cost_n - cost_b @ B_inv @ A[:, no_basiques]
+
+        # Condició d'optimalitat: r' >= 0  → STOP
+        candidats = [(no_basiques[e], e) for e in range(len(r)) if r[e] < 0]
+        if not candidats:
+            return x, z, basiques, B_inv, iteracio
+
+        # Regla de Bland: variable d'entrada q = menor índex amb r_q < 0
+        entra_idx, e = min(candidats, key=lambda t: t[0])
+
+        # Pas 3: direcció bàsica factible  d_B = -B^{-1} * A_q
+        d_B = -(B_inv @ A[:, entra_idx])
+
+        # Pas 3.2: totes components >= 0 → PL no acotat → STOP
+        if np.all(d_B >= 0):
+            return x, "No acotat", basiques, B_inv, iteracio
+
+        # Pas 4: longitud de pas màxima  θ* = min_{i | d_B(i)<0} -x_B(i)/d_B(i)
+        # Desempat per Bland: menor índex de la variable bàsica de sortida
+        ratios = [
+            (-x[i] / d_B[i], basiques[i], i)
+            for i in range(m) if d_B[i] < 0
+        ]
+        theta, _, p = min(ratios, key=lambda t: (t[0], t[1]))
+        marxa = basiques[p]
+
+        # Pas 5.1: actualitzar x_B i z
+        x = x + theta * d_B
+        x[p] = theta
+        z = z + theta * r[e]
+
+        # Pas 5.2: actualitzar conjunts B i N
+        basiques[p] = entra_idx
+        no_basiques = sorted([j for j in range(n) if j not in basiques])
+
+        # Actualitzar la inversa per eta-factorització
+        transformacio = np.eye(m)
+        transformacio[:, p] = [
+            -d_B[i] / d_B[p] if i != p else -1.0 / d_B[p]
+            for i in range(m)
+        ]
+        B_inv = transformacio @ B_inv
+
+        iteracio += 1
+
+
