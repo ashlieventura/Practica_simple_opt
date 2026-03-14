@@ -25,7 +25,7 @@ def read_dades(num: int, prob: int, fitxer: str = "OPT25-26_Datos práctica 1.tx
     with open(fitxer, "r") as f:
         lines = f.readlines()
 
-    # --- Cerca la capçalera de la secció ---
+    #  Cerca la capçalera de la secció 
     tag_num  = f"datos{num}".lower()
     tag_prob = f"problemaPL{prob}".lower()
     start = next(
@@ -35,14 +35,14 @@ def read_dades(num: int, prob: int, fitxer: str = "OPT25-26_Datos práctica 1.tx
         None
     )
 
-    # --- Vector de costos ---
+    # Vector de costos
     cost = []
     while idx < len(lines) and "A=" not in lines[idx]:
         if is_number_line(lines[idx]):
             cost += extract_ints(lines[idx])
         idx += 1
 
-    # --- Matriu A (gestiona blocs de múltiples columnes) ---
+    # Matriu A (gestiona blocs de múltiples columnes)
     A = []
     primer_bloc = True
     idx += 1  # salta la línia "A="
@@ -64,12 +64,12 @@ def read_dades(num: int, prob: int, fitxer: str = "OPT25-26_Datos práctica 1.tx
             A.append(extract_ints(line))
         idx += 1
 
-    # --- Vector b ---
+    # Vector b 
     idx += 1  # salta la línia "b="
     b = extract_ints(lines[idx])
     idx += 1
 
-    # --- Valor òptim z* i base v ---
+    # Valor òptim z* i base v 
     z, v = None, None
     while idx < len(lines):
         line = lines[idx]
@@ -83,41 +83,6 @@ def read_dades(num: int, prob: int, fitxer: str = "OPT25-26_Datos práctica 1.tx
 
     return np.array(cost), np.array(A), np.array(b), z, v
 
-
-
-def fase_inicial(A: np.ndarray, b: np.ndarray):
-    """Troba una SBF inicial mitjançant el mètode de la fase I (variables artificials).
-
-    Construeix el problema auxiliar:
-        min  sum(a_i)
-        s.a. [A | I] * [x; a] = b,  x,a >= 0
-    on a_i són m variables artificials amb cost 1 i la resta cost 0.
-    Resol el problema auxiliar amb simplex_proces partint de la base artificial I.
-    Si el mínim és 0 (dins tolerància), extreu la base factible original.
-
-    Args:
-        A (np.ndarray): Matriu de restriccions (m x n) del problema original.
-        b (np.ndarray): Termes independents (m,). Han de ser >= 0.
-
-    Returns:
-        basiques (list[int]): Índexs de les variables bàsiques de la SBF.
-        no_basiques (list[int]): Índexs de les variables no bàsiques.
-        inversa (np.ndarray): Inversa de la base B de la SBF.
-        factible (bool): True si s'ha trobat una SBF, False si el problema és infactible.
-    """
-    m, n = A.shape
-    
-    # Problema auxiliar: [A_aux | I_m], cost = [0,...,0, 1,...,1]
-    A_fase1 = np.hstack((A, np.eye(m)))
-    cost_fase1 = np.array([0.0] * n + [1.0] * m)
-
-    # Base inicial: les m variables artificials (índexs n, n+1, ..., n+m-1)
-    basiques_f1 = list(range(n, n + m))
-    inversa_f1 = np.eye(m)
-
-    return simplex_proces(
-        cost_fase1, A_fase1, b, basiques_f1, inversa_f1
-    )
 
 
 def simplex_proces(cost: np.ndarray, A: np.ndarray, b: np.ndarray,
@@ -188,7 +153,7 @@ def simplex_proces(cost: np.ndarray, A: np.ndarray, b: np.ndarray,
         basiques[p] = entra_idx
         no_basiques = sorted([j for j in range(n) if j not in basiques])
 
-        # Actualitzar la inversa per eta-factorització
+        # Actualitzar la inversa amb a la Regla de Band 
         transformacio = np.eye(m)
         transformacio[:, p] = [
             -d_B[i] / d_B[p] if i != p else -1.0 / d_B[p]
@@ -197,5 +162,44 @@ def simplex_proces(cost: np.ndarray, A: np.ndarray, b: np.ndarray,
         B_inv = transformacio @ B_inv
 
         iteracio += 1
+
+
+
+
+
+
+def fase_inicial(A: np.ndarray, b: np.ndarray):
+    """Troba una SBF inicial mitjançant el mètode de la fase I (variables artificials).
+
+    Construeix el problema auxiliar:
+        min  sum(a_i)
+        s.a. [A | I] * [x; a] = b,  x,a >= 0
+    on a_i són m variables artificials amb cost 1 i la resta cost 0.
+    Resol el problema auxiliar amb simplex_proces partint de la base artificial I.
+    Si el mínim és 0 (dins tolerància), extreu la base factible original.
+
+    Args:
+        A (np.ndarray): Matriu de restriccions (m x n) del problema original.
+        b (np.ndarray): Termes independents (m,). Han de ser >= 0.
+
+    Returns:
+        basiques (list[int]): Índexs de les variables bàsiques de la SBF.
+        no_basiques (list[int]): Índexs de les variables no bàsiques.
+        inversa (np.ndarray): Inversa de la base B de la SBF.
+        factible (bool): True si s'ha trobat una SBF, False si el problema és infactible.
+    """
+    m, n = A.shape
+    
+    # Problema auxiliar: [A_aux | I_m], cost = [0,...,0, 1,...,1]
+    A_fase1 = np.hstack((A, np.eye(m)))
+    cost_fase1 = np.array([0.0] * n + [1.0] * m)
+
+    # Base inicial: les m variables artificials (índexs n, n+1, ..., n+m-1)
+    basiques_f1 = list(range(n, n + m))
+    inversa_f1 = np.eye(m)
+
+    return simplex_proces(
+        cost_fase1, A_fase1, b, basiques_f1, inversa_f1
+    )
 
 
