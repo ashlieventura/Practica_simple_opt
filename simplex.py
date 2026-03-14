@@ -106,57 +106,18 @@ def fase_inicial(A: np.ndarray, b: np.ndarray):
         factible (bool): True si s'ha trobat una SBF, False si el problema és infactible.
     """
     m, n = A.shape
-
-    # Garantim b >= 0 (multipliquem files negatives per -1)
-    A_aux = A.astype(float).copy()
-    b_aux = b.astype(float).copy()
-    for i in range(m):
-        if b_aux[i] < 0:
-            A_aux[i] *= -1
-            b_aux[i] *= -1
-
+    
     # Problema auxiliar: [A_aux | I_m], cost = [0,...,0, 1,...,1]
-    A_fase1 = np.hstack((A_aux, np.eye(m)))
+    A_fase1 = np.hstack((A, np.eye(m)))
     cost_fase1 = np.array([0.0] * n + [1.0] * m)
 
     # Base inicial: les m variables artificials (índexs n, n+1, ..., n+m-1)
     basiques_f1 = list(range(n, n + m))
     inversa_f1 = np.eye(m)
 
-    # Resol el problema auxiliar
-    x_f1, z_f1, bas_f1, inv_f1, _ = simplex_proces(
-        cost_fase1, A_fase1, b_aux, basiques_f1, inversa_f1
+    return simplex_proces(
+        cost_fase1, A_fase1, b, basiques_f1, inversa_f1
     )
-
-    # Si z* > 0 (dins tolerància numèrica) → infactible
-    if z_f1 == "No acotat" or np.round(float(z_f1), 10) > 0:
-        return [], list(range(n)), None, False
-
-    # Elimina les variables artificials de la base si hi han quedat amb valor 0
-    basiques = list(bas_f1)
-    inversa = inv_f1.copy()
-    for pos, var in enumerate(basiques):
-        if var >= n:
-            # Variable artificial a la base amb valor 0 (degeneració)
-            # Intentem substituir-la per qualsevol variable original no bàsica
-            no_bas_orig = [j for j in range(n) if j not in basiques]
-            substituida = False
-            for j in no_bas_orig:
-                col = inversa @ A_aux[:, j]
-                if abs(col[pos]) > 1e-10:
-                    # Aplica el pivot per treure la variable artificial
-                    eta = np.eye(m)
-                    eta[:, pos] = [-col[i] / col[pos] if i != pos else 1.0 / col[pos]
-                                   for i in range(m)]
-                    inversa = eta @ inversa
-                    basiques[pos] = j
-                    substituida = True
-                    break
-            # Si no s'ha pogut substituir, la columna és linealment dependent;
-            # la variable artificial pot quedar (la fila és redundant).
-
-    no_basiques = sorted([j for j in range(n) if j not in basiques])
-    return basiques, no_basiques, inversa, True
 
 
 def simplex_proces(cost: np.ndarray, A: np.ndarray, b: np.ndarray,
