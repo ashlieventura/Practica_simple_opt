@@ -74,7 +74,7 @@ class Simplex:
     # Resolució principal
     # -------------------------------------------------------------------------
 
-    def solve(self, tol: float = 1e-12) -> tuple:
+    def solve(self, tol: float = 1e-12) -> None:
         """
         Executa Fase I + Fase II i desa els resultats a l'objecte.
 
@@ -124,7 +124,6 @@ class Simplex:
 
         self._print_resultats(fase="II")
 
-        return x, z_o_estat, base_final, B_inv_final, iter_fase2
 
     # -------------------------------------------------------------------------
     # Algorisme del simplex (nucli)
