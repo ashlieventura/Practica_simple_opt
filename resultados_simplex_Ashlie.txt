@@ -2,41 +2,41 @@
 Problema 1
 ==================================================
 [Simplex] Fase I
-[Simplex] Iteració   1 : iout = 0, q = 0, B(p) = 20, theta* = 0.105, z = 1715.947
-[Simplex] Iteració   2 : iout = 3, q = 2, B(p) = 23, theta* = 0.030, z = 1674.911
-[Simplex] Iteració   3 : iout = 8, q = 1, B(p) = 28, theta* = 0.014, z = 1664.944
-[Simplex] Iteració   4 : iout = 7, q = 3, B(p) = 27, theta* = 0.018, z = 1659.708
-[Simplex] Iteració   5 : iout = 5, q = 5, B(p) = 25, theta* = 0.300, z = 1480.618
-[Simplex] Iteració   6 : iout = 7, q = 4, B(p) = 3, theta* = 0.043, z = 1448.797
-[Simplex] Iteració   7 : iout = 2, q = 7, B(p) = 22, theta* = 0.041, z = 1400.587
-[Simplex] Iteració   8 : iout = 8, q = 6, B(p) = 1, theta* = 0.147, z = 1378.549
-[Simplex] Iteració   9 : iout = 1, q = 9, B(p) = 21, theta* = 0.012, z = 1368.869
-[Simplex] Iteració  10 : iout = 8, q = 1, B(p) = 6, theta* = 0.171, z = 1363.174
-[Simplex] Iteració  11 : iout = 8, q = 3, B(p) = 1, theta* = 0.148, z = 1340.492
-[Simplex] Iteració  12 : iout = 5, q = 8, B(p) = 5, theta* = 0.780, z = 1274.297
-[Simplex] Iteració  13 : iout = 9, q = 10, B(p) = 29, theta* = 3.243, z = 152.238
-[Simplex] Iteració  14 : iout = 4, q = 1, B(p) = 24, theta* = 0.361, z = 107.771
-[Simplex] Iteració  15 : iout = 5, q = 5, B(p) = 8, theta* = 0.336, z = 93.249
-[Simplex] Iteració  16 : iout = 7, q = 6, B(p) = 4, theta* = 0.743, z = 91.743
-[Simplex] Iteració  17 : iout = 6, q = 11, B(p) = 26, theta* = 0.585, z = 0.000
+[Simplex] Iteración   1 : iout = 0, q = 0, B(p) = 20, theta* = 0.105, z = 1715.947
+[Simplex] Iteración   2 : iout = 3, q = 2, B(p) = 23, theta* = 0.030, z = 1674.911
+[Simplex] Iteración   3 : iout = 8, q = 1, B(p) = 28, theta* = 0.014, z = 1664.944
+[Simplex] Iteración   4 : iout = 7, q = 3, B(p) = 27, theta* = 0.018, z = 1659.708
+[Simplex] Iteración   5 : iout = 5, q = 5, B(p) = 25, theta* = 0.300, z = 1480.618
+[Simplex] Iteración   6 : iout = 7, q = 4, B(p) = 3, theta* = 0.043, z = 1448.797
+[Simplex] Iteración   7 : iout = 2, q = 7, B(p) = 22, theta* = 0.041, z = 1400.587
+[Simplex] Iteración   8 : iout = 8, q = 6, B(p) = 1, theta* = 0.147, z = 1378.549
+[Simplex] Iteración   9 : iout = 1, q = 9, B(p) = 21, theta* = 0.012, z = 1368.869
+[Simplex] Iteración  10 : iout = 8, q = 1, B(p) = 6, theta* = 0.171, z = 1363.174
+[Simplex] Iteración  11 : iout = 8, q = 3, B(p) = 1, theta* = 0.148, z = 1340.492
+[Simplex] Iteración  12 : iout = 5, q = 8, B(p) = 5, theta* = 0.780, z = 1274.297
+[Simplex] Iteración  13 : iout = 9, q = 10, B(p) = 29, theta* = 3.243, z = 152.238
+[Simplex] Iteración  14 : iout = 4, q = 1, B(p) = 24, theta* = 0.361, z = 107.771
+[Simplex] Iteración  15 : iout = 5, q = 5, B(p) = 8, theta* = 0.336, z = 93.249
+[Simplex] Iteración  16 : iout = 7, q = 6, B(p) = 4, theta* = 0.743, z = 91.743
+[Simplex] Iteración  17 : iout = 6, q = 11, B(p) = 26, theta* = 0.585, z = 0.000
 [Simplex] Fase II
-[Simplex] Iteració  18 : iout = 7, q = 4, B(p) = 6, theta* = 0.522, z = 376.426
-[Simplex] Iteració  19 : iout = 4, q = 12, B(p) = 1, theta* = 0.609, z = 274.135
-[Simplex] Iteració  20 : iout = 1, q = 6, B(p) = 9, theta* = 1.968, z = 163.108
-[Simplex] Iteració  21 : iout = 9, q = 13, B(p) = 10, theta* = 0.079, z = 137.675
-[Simplex] Iteració  22 : iout = 3, q = 1, B(p) = 2, theta* = 0.867, z = -7.543
-[Simplex] Iteració  23 : iout = 2, q = 9, B(p) = 7, theta* = 0.866, z = -114.773
-[Simplex] Iteració  24 : iout = 1, q = 15, B(p) = 6, theta* = 50.458, z = -190.136
-[Simplex] Iteració  25 : iout = 8, q = 7, B(p) = 3, theta* = 0.436, z = -223.937
-[Simplex] Iteració  26 : iout = 2, q = 17, B(p) = 9, theta* = 135.478, z = -285.377
+[Simplex] Iteración  18 : iout = 7, q = 4, B(p) = 6, theta* = 0.522, z = 376.426
+[Simplex] Iteración  19 : iout = 4, q = 12, B(p) = 1, theta* = 0.609, z = 274.135
+[Simplex] Iteración  20 : iout = 1, q = 6, B(p) = 9, theta* = 1.968, z = 163.108
+[Simplex] Iteración  21 : iout = 9, q = 13, B(p) = 10, theta* = 0.079, z = 137.675
+[Simplex] Iteración  22 : iout = 3, q = 1, B(p) = 2, theta* = 0.867, z = -7.543
+[Simplex] Iteración  23 : iout = 2, q = 9, B(p) = 7, theta* = 0.866, z = -114.773
+[Simplex] Iteración  24 : iout = 1, q = 15, B(p) = 6, theta* = 50.458, z = -190.136
+[Simplex] Iteración  25 : iout = 8, q = 7, B(p) = 3, theta* = 0.436, z = -223.937
+[Simplex] Iteración  26 : iout = 2, q = 17, B(p) = 9, theta* = 135.478, z = -285.377
 
-Solució òptima:
+Solución óptima:
   vb = 0 15 17 1 12 5 11 4 7 13
   xb = 1.8628 172.2893 135.4783 2.4244 1.9839 2.9802 0.6551 2.9971 0.9259 0.4751
   z  = -285.3773
   r  = 0.0000 0.0000 106.7652 30.2259 -0.0000 0.0000 115.7030 -0.0000 75.6695 84.5982 67.8003 0.0000 0.0000 0.0000 0.1245 -0.0000 0.1410 0.0000 0.0570 0.2927
 
-Solució esperada (del fitxer):
+Solución esperada (del fichero):
   z* = -285.3773
   vb*= [0, 17, 1, 15, 12, 5, 11, 4, 7, 13]
 
@@ -44,37 +44,37 @@ Solució esperada (del fitxer):
 Problema 2
 ==================================================
 [Simplex] Fase I
-[Simplex] Iteració   1 : iout = 5, q = 0, B(p) = 25, theta* = 0.393, z = 2114.967
-[Simplex] Iteració   2 : iout = 6, q = 1, B(p) = 26, theta* = 0.633, z = 1842.739
-[Simplex] Iteració   3 : iout = 5, q = 4, B(p) = 0, theta* = 0.607, z = 1810.644
-[Simplex] Iteració   4 : iout = 3, q = 5, B(p) = 23, theta* = 0.035, z = 1788.320
-[Simplex] Iteració   5 : iout = 5, q = 0, B(p) = 4, theta* = 0.722, z = 1704.157
-[Simplex] Iteració   6 : iout = 9, q = 2, B(p) = 29, theta* = 0.059, z = 1696.334
-[Simplex] Iteració   7 : iout = 5, q = 4, B(p) = 0, theta* = 0.077, z = 1422.127
-[Simplex] Iteració   8 : iout = 9, q = 3, B(p) = 2, theta* = 1.770, z = 1410.135
-[Simplex] Iteració   9 : iout = 6, q = 6, B(p) = 1, theta* = 0.079, z = 1365.417
-[Simplex] Iteració  10 : iout = 0, q = 0, B(p) = 20, theta* = 0.454, z = 1320.668
-[Simplex] Iteració  11 : iout = 5, q = 2, B(p) = 4, theta* = 0.988, z = 1202.394
-[Simplex] Iteració  12 : iout = 8, q = 8, B(p) = 28, theta* = 0.995, z = 864.173
-[Simplex] Iteració  13 : iout = 5, q = 4, B(p) = 2, theta* = 0.327, z = 855.604
-[Simplex] Iteració  14 : iout = 1, q = 11, B(p) = 21, theta* = 0.171, z = 739.168
-[Simplex] Iteració  15 : iout = 0, q = 1, B(p) = 0, theta* = 0.059, z = 727.263
-[Simplex] Iteració  16 : iout = 7, q = 2, B(p) = 27, theta* = 1.243, z = 342.676
-[Simplex] Iteració  17 : iout = 4, q = 7, B(p) = 24, theta* = 0.282, z = 250.156
-[Simplex] Iteració  18 : iout = 4, q = 9, B(p) = 7, theta* = 0.251, z = 224.600
-[Simplex] Iteració  19 : iout = 7, q = 10, B(p) = 2, theta* = 0.780, z = 188.135
-[Simplex] Iteració  20 : iout = 7, q = 12, B(p) = 10, theta* = 0.155, z = 134.140
-[Simplex] Iteració  21 : iout = 2, q = 0, B(p) = 22, theta* = 0.837, z = 0.000
+[Simplex] Iteración   1 : iout = 5, q = 0, B(p) = 25, theta* = 0.393, z = 2114.967
+[Simplex] Iteración   2 : iout = 6, q = 1, B(p) = 26, theta* = 0.633, z = 1842.739
+[Simplex] Iteración   3 : iout = 5, q = 4, B(p) = 0, theta* = 0.607, z = 1810.644
+[Simplex] Iteración   4 : iout = 3, q = 5, B(p) = 23, theta* = 0.035, z = 1788.320
+[Simplex] Iteración   5 : iout = 5, q = 0, B(p) = 4, theta* = 0.722, z = 1704.157
+[Simplex] Iteración   6 : iout = 9, q = 2, B(p) = 29, theta* = 0.059, z = 1696.334
+[Simplex] Iteración   7 : iout = 5, q = 4, B(p) = 0, theta* = 0.077, z = 1422.127
+[Simplex] Iteración   8 : iout = 9, q = 3, B(p) = 2, theta* = 1.770, z = 1410.135
+[Simplex] Iteración   9 : iout = 6, q = 6, B(p) = 1, theta* = 0.079, z = 1365.417
+[Simplex] Iteración  10 : iout = 0, q = 0, B(p) = 20, theta* = 0.454, z = 1320.668
+[Simplex] Iteración  11 : iout = 5, q = 2, B(p) = 4, theta* = 0.988, z = 1202.394
+[Simplex] Iteración  12 : iout = 8, q = 8, B(p) = 28, theta* = 0.995, z = 864.173
+[Simplex] Iteración  13 : iout = 5, q = 4, B(p) = 2, theta* = 0.327, z = 855.604
+[Simplex] Iteración  14 : iout = 1, q = 11, B(p) = 21, theta* = 0.171, z = 739.168
+[Simplex] Iteración  15 : iout = 0, q = 1, B(p) = 0, theta* = 0.059, z = 727.263
+[Simplex] Iteración  16 : iout = 7, q = 2, B(p) = 27, theta* = 1.243, z = 342.676
+[Simplex] Iteración  17 : iout = 4, q = 7, B(p) = 24, theta* = 0.282, z = 250.156
+[Simplex] Iteración  18 : iout = 4, q = 9, B(p) = 7, theta* = 0.251, z = 224.600
+[Simplex] Iteración  19 : iout = 7, q = 10, B(p) = 2, theta* = 0.780, z = 188.135
+[Simplex] Iteración  20 : iout = 7, q = 12, B(p) = 10, theta* = 0.155, z = 134.140
+[Simplex] Iteración  21 : iout = 2, q = 0, B(p) = 22, theta* = 0.837, z = 0.000
 [Simplex] Fase II
-[Simplex] Iteració  22 : iout = 4, q = 7, B(p) = 9, theta* = 2.317, z = -66.464
-[Simplex] Iteració  23 : iout = 2, q = 13, B(p) = 0, theta* = 0.794, z = -164.848
-[Simplex] Iteració  24 : iout = 5, q = 2, B(p) = 4, theta* = 0.380, z = -186.372
-[Simplex] Iteració  25 : iout = 6, q = 9, B(p) = 6, theta* = 1.827, z = -208.761
-[Simplex] Iteració  26 : iout = 8, q = 19, B(p) = 8, theta* = 153.355, z = -356.994
-[Simplex] Iteració  27 : iout = 9, q = 6, B(p) = 3, theta* = 0.235, z = -368.337
-[Simplex] Iteració  28 : iout = 6, q = 4, B(p) = 9, theta* = 0.586, z = -397.412
+[Simplex] Iteración  22 : iout = 4, q = 7, B(p) = 9, theta* = 2.317, z = -66.464
+[Simplex] Iteración  23 : iout = 2, q = 13, B(p) = 0, theta* = 0.794, z = -164.848
+[Simplex] Iteración  24 : iout = 5, q = 2, B(p) = 4, theta* = 0.380, z = -186.372
+[Simplex] Iteración  25 : iout = 6, q = 9, B(p) = 6, theta* = 1.827, z = -208.761
+[Simplex] Iteración  26 : iout = 8, q = 19, B(p) = 8, theta* = 153.355, z = -356.994
+[Simplex] Iteración  27 : iout = 9, q = 6, B(p) = 3, theta* = 0.235, z = -368.337
+[Simplex] Iteración  28 : iout = 6, q = 4, B(p) = 9, theta* = 0.586, z = -397.412
 
-Solució òptima:
+Solución óptima:
   vb = 1 11 13 5 7 2 4 12 19 6
   xb = 3.2503 1.0703 0.6633 0.8840 1.3551 3.2481 0.5860 0.3026 237.2291 1.6198
   z  = -397.4125
@@ -84,83 +84,83 @@ Solució òptima:
 Problema 3
 ==================================================
 [Simplex] Fase I
-[Simplex] Iteració   1 : iout = 3, q = 0, B(p) = 23, theta* = 0.414, z = 699.471
-[Simplex] Iteració   2 : iout = 7, q = 1, B(p) = 27, theta* = 0.130, z = 652.383
-[Simplex] Iteració   3 : iout = 7, q = 3, B(p) = 1, theta* = 0.165, z = 644.491
-[Simplex] Iteració   4 : iout = 7, q = 5, B(p) = 3, theta* = 0.120, z = 627.321
-[Simplex] Iteració   5 : iout = 2, q = 8, B(p) = 22, theta* = 0.060, z = 612.185
-[Simplex] Iteració   6 : iout = 7, q = 1, B(p) = 5, theta* = 0.182, z = 606.741
-[Simplex] Iteració   7 : iout = 7, q = 3, B(p) = 1, theta* = 0.220, z = 603.123
-[Simplex] Iteració   8 : iout = 9, q = 4, B(p) = 29, theta* = 0.344, z = 566.723
-[Simplex] Iteració   9 : iout = 1, q = 1, B(p) = 21, theta* = 0.290, z = 566.133
-[Simplex] Iteració  10 : iout = 1, q = 6, B(p) = 1, theta* = 0.394, z = 565.711
-[Simplex] Iteració  11 : iout = 6, q = 10, B(p) = 26, theta* = 0.209, z = 502.595
-[Simplex] Iteració  12 : iout = 9, q = 2, B(p) = 4, theta* = 0.044, z = 496.581
-[Simplex] Iteració  13 : iout = 3, q = 1, B(p) = 0, theta* = 0.095, z = 493.215
-[Simplex] Iteració  14 : iout = 9, q = 9, B(p) = 2, theta* = 0.139, z = 475.625
-[Simplex] Iteració  15 : iout = 1, q = 11, B(p) = 6, theta* = 0.107, z = 463.865
-[Simplex] Iteració  16 : iout = 3, q = 0, B(p) = 1, theta* = 0.130, z = 463.746
-[Simplex] Iteració  17 : iout = 5, q = 15, B(p) = 25, theta* = 242.057, z = 221.688
-[Simplex] Iteració  18 : iout = 3, q = 1, B(p) = 0, theta* = 0.165, z = 210.641
-[Simplex] Iteració  19 : iout = 7, q = 5, B(p) = 3, theta* = 0.079, z = 200.738
-[Simplex] Iteració  20 : iout = 8, q = 0, B(p) = 28, theta* = 0.099, z = 200.625
-[Simplex] Iteració  21 : iout = 8, q = 7, B(p) = 0, theta* = 0.158, z = 194.715
-[Simplex] Iteració  22 : iout = 7, q = 13, B(p) = 5, theta* = 0.015, z = 193.678
-[Simplex] Iteració  23 : iout = 8, q = 0, B(p) = 7, theta* = 0.122, z = 192.990
-[Simplex] Iteració  24 : iout = 8, q = 16, B(p) = 0, theta* = 19.211, z = 179.038
-[Simplex] Iteració  25 : iout = 6, q = 3, B(p) = 10, theta* = 0.211, z = 166.597
-[Simplex] Iteració  26 : iout = 4, q = 19, B(p) = 24, theta* = 13.018, z = 159.400
-[Simplex] Infactible: el problema no té solució factible.
+[Simplex] Iteración   1 : iout = 3, q = 0, B(p) = 23, theta* = 0.414, z = 699.471
+[Simplex] Iteración   2 : iout = 7, q = 1, B(p) = 27, theta* = 0.130, z = 652.383
+[Simplex] Iteración   3 : iout = 7, q = 3, B(p) = 1, theta* = 0.165, z = 644.491
+[Simplex] Iteración   4 : iout = 7, q = 5, B(p) = 3, theta* = 0.120, z = 627.321
+[Simplex] Iteración   5 : iout = 2, q = 8, B(p) = 22, theta* = 0.060, z = 612.185
+[Simplex] Iteración   6 : iout = 7, q = 1, B(p) = 5, theta* = 0.182, z = 606.741
+[Simplex] Iteración   7 : iout = 7, q = 3, B(p) = 1, theta* = 0.220, z = 603.123
+[Simplex] Iteración   8 : iout = 9, q = 4, B(p) = 29, theta* = 0.344, z = 566.723
+[Simplex] Iteración   9 : iout = 1, q = 1, B(p) = 21, theta* = 0.290, z = 566.133
+[Simplex] Iteración  10 : iout = 1, q = 6, B(p) = 1, theta* = 0.394, z = 565.711
+[Simplex] Iteración  11 : iout = 6, q = 10, B(p) = 26, theta* = 0.209, z = 502.595
+[Simplex] Iteración  12 : iout = 9, q = 2, B(p) = 4, theta* = 0.044, z = 496.581
+[Simplex] Iteración  13 : iout = 3, q = 1, B(p) = 0, theta* = 0.095, z = 493.215
+[Simplex] Iteración  14 : iout = 9, q = 9, B(p) = 2, theta* = 0.139, z = 475.625
+[Simplex] Iteración  15 : iout = 1, q = 11, B(p) = 6, theta* = 0.107, z = 463.865
+[Simplex] Iteración  16 : iout = 3, q = 0, B(p) = 1, theta* = 0.130, z = 463.746
+[Simplex] Iteración  17 : iout = 5, q = 15, B(p) = 25, theta* = 242.057, z = 221.688
+[Simplex] Iteración  18 : iout = 3, q = 1, B(p) = 0, theta* = 0.165, z = 210.641
+[Simplex] Iteración  19 : iout = 7, q = 5, B(p) = 3, theta* = 0.079, z = 200.738
+[Simplex] Iteración  20 : iout = 8, q = 0, B(p) = 28, theta* = 0.099, z = 200.625
+[Simplex] Iteración  21 : iout = 8, q = 7, B(p) = 0, theta* = 0.158, z = 194.715
+[Simplex] Iteración  22 : iout = 7, q = 13, B(p) = 5, theta* = 0.015, z = 193.678
+[Simplex] Iteración  23 : iout = 8, q = 0, B(p) = 7, theta* = 0.122, z = 192.990
+[Simplex] Iteración  24 : iout = 8, q = 16, B(p) = 0, theta* = 19.211, z = 179.038
+[Simplex] Iteración  25 : iout = 6, q = 3, B(p) = 10, theta* = 0.211, z = 166.597
+[Simplex] Iteración  26 : iout = 4, q = 19, B(p) = 24, theta* = 13.018, z = 159.400
+[Simplex] Infactible: el problema no tiene solución factible.
 
 ==================================================
 Problema 4
 ==================================================
 [Simplex] Fase I
-[Simplex] Iteració   1 : iout = 8, q = 0, B(p) = 32, theta* = 8.423, z = 2573.577
-[Simplex] Iteració   2 : iout = 4, q = 1, B(p) = 28, theta* = 7.346, z = 2132.180
-[Simplex] Iteració   3 : iout = 6, q = 2, B(p) = 30, theta* = 1.762, z = 1375.879
-[Simplex] Iteració   4 : iout = 1, q = 3, B(p) = 25, theta* = 1.968, z = 975.939
-[Simplex] Iteració   5 : iout = 4, q = 4, B(p) = 1, theta* = 0.744, z = 874.380
-[Simplex] Iteració   6 : iout = 2, q = 5, B(p) = 26, theta* = 2.664, z = 796.697
-[Simplex] Iteració   7 : iout = 9, q = 6, B(p) = 33, theta* = 3.803, z = 364.385
-[Simplex] Iteració   8 : iout = 5, q = 7, B(p) = 29, theta* = 2.121, z = 333.563
-[Simplex] Iteració   9 : iout = 8, q = 1, B(p) = 0, theta* = 0.092, z = 332.653
-[Simplex] Iteració  10 : iout = 6, q = 9, B(p) = 2, theta* = 0.532, z = 264.461
-[Simplex] Iteració  11 : iout = 3, q = 0, B(p) = 27, theta* = 0.644, z = 154.381
-[Simplex] Iteració  12 : iout = 5, q = 2, B(p) = 7, theta* = 1.634, z = 102.467
-[Simplex] Iteració  13 : iout = 7, q = 10, B(p) = 31, theta* = 0.001, z = 102.386
-[Simplex] Iteració  14 : iout = 5, q = 7, B(p) = 2, theta* = 1.849, z = 68.081
-[Simplex] Iteració  15 : iout = 5, q = 11, B(p) = 7, theta* = 0.644, z = 59.125
-[Simplex] Iteració  16 : iout = 7, q = 12, B(p) = 10, theta* = 0.111, z = 58.121
-[Simplex] Iteració  17 : iout = 5, q = 7, B(p) = 11, theta* = 1.275, z = 54.790
-[Simplex] Iteració  18 : iout = 3, q = 13, B(p) = 0, theta* = 0.452, z = 3.768
-[Simplex] Iteració  19 : iout = 0, q = 2, B(p) = 24, theta* = 0.056, z = 0.000
+[Simplex] Iteración   1 : iout = 8, q = 0, B(p) = 32, theta* = 8.423, z = 2573.577
+[Simplex] Iteración   2 : iout = 4, q = 1, B(p) = 28, theta* = 7.346, z = 2132.180
+[Simplex] Iteración   3 : iout = 6, q = 2, B(p) = 30, theta* = 1.762, z = 1375.879
+[Simplex] Iteración   4 : iout = 1, q = 3, B(p) = 25, theta* = 1.968, z = 975.939
+[Simplex] Iteración   5 : iout = 4, q = 4, B(p) = 1, theta* = 0.744, z = 874.380
+[Simplex] Iteración   6 : iout = 2, q = 5, B(p) = 26, theta* = 2.664, z = 796.697
+[Simplex] Iteración   7 : iout = 9, q = 6, B(p) = 33, theta* = 3.803, z = 364.385
+[Simplex] Iteración   8 : iout = 5, q = 7, B(p) = 29, theta* = 2.121, z = 333.563
+[Simplex] Iteración   9 : iout = 8, q = 1, B(p) = 0, theta* = 0.092, z = 332.653
+[Simplex] Iteración  10 : iout = 6, q = 9, B(p) = 2, theta* = 0.532, z = 264.461
+[Simplex] Iteración  11 : iout = 3, q = 0, B(p) = 27, theta* = 0.644, z = 154.381
+[Simplex] Iteración  12 : iout = 5, q = 2, B(p) = 7, theta* = 1.634, z = 102.467
+[Simplex] Iteración  13 : iout = 7, q = 10, B(p) = 31, theta* = 0.001, z = 102.386
+[Simplex] Iteración  14 : iout = 5, q = 7, B(p) = 2, theta* = 1.849, z = 68.081
+[Simplex] Iteración  15 : iout = 5, q = 11, B(p) = 7, theta* = 0.644, z = 59.125
+[Simplex] Iteración  16 : iout = 7, q = 12, B(p) = 10, theta* = 0.111, z = 58.121
+[Simplex] Iteración  17 : iout = 5, q = 7, B(p) = 11, theta* = 1.275, z = 54.790
+[Simplex] Iteración  18 : iout = 3, q = 13, B(p) = 0, theta* = 0.452, z = 3.768
+[Simplex] Iteración  19 : iout = 0, q = 2, B(p) = 24, theta* = 0.056, z = 0.000
 [Simplex] Fase II
-[Simplex] Iteració  20 : iout = 0, q = 10, B(p) = 2, theta* = 0.913, z = -837.041
-[Simplex] Iteració  21 : iout = 9, q = 0, B(p) = 6, theta* = 0.025, z = -837.720
-[Simplex] Iteració  22 : iout = 7, q = 11, B(p) = 12, theta* = 0.548, z = -898.577
-[Simplex] Iteració  23 : iout = 5, q = 6, B(p) = 7, theta* = 2.921, z = -980.937
-[Simplex] Iteració  24 : iout = 6, q = 8, B(p) = 9, theta* = 2.771, z = -1056.027
-[Simplex] Iteració  25 : iout = 8, q = 15, B(p) = 1, theta* = 7.198, z = -1061.789
-[Simplex] Iteració  26 : iout = 8, q = 17, B(p) = 15, theta* = 14.833, z = -1068.162
-[Simplex] Iteració  27 : iout = 1, q = 9, B(p) = 3, theta* = 0.072, z = -1069.721
-[Simplex] Iteració  28 : iout = 2, q = 15, B(p) = 5, theta* = 22.138, z = -1084.688
-[Simplex] Iteració  29 : iout = 4, q = 18, B(p) = 4, theta* = 17.597, z = -1095.132
-[Simplex] Iteració  30 : iout = 3, q = 3, B(p) = 13, theta* = 0.943, z = -1159.115
-[Simplex] Iteració  31 : iout = 9, q = 5, B(p) = 0, theta* = 0.243, z = -1172.019
-[Simplex] Iteració  32 : iout = 9, q = 19, B(p) = 5, theta* = 67.069, z = -1217.695
-[Simplex] Iteració  33 : iout = 3, q = 2, B(p) = 3, theta* = 0.029, z = -1218.078
-[Simplex] Iteració  34 : iout = 3, q = 4, B(p) = 2, theta* = 0.025, z = -1218.938
-[Simplex] Iteració  35 : iout = 3, q = 13, B(p) = 4, theta* = 0.010, z = -1219.005
-[Simplex] Iteració  36 : iout = 3, q = 16, B(p) = 13, theta* = 1.729, z = -1219.817
-[Simplex] Iteració  37 : iout = 6, q = 14, B(p) = 8, theta* = 845.099, z = -1350.485
-[Simplex] Iteració  38 : iout = 1, q = 20, B(p) = 9, theta* = 301.169, z = -1405.698
-[Simplex] Iteració  39 : iout = 5, q = 22, B(p) = 6, theta* = 398.217, z = -1714.294
-[Simplex] Iteració  40 : iout = 1, q = 21, B(p) = 20, theta* = 267.312, z = -1742.182
-[Simplex] Iteració  41 : iout = 8, q = 0, B(p) = 17, theta* = 4.872, z = -1768.731
-[Simplex] Iteració  42 : iout = 8, q = 23, B(p) = 0, theta* = 1748.811, z = -6188.516
-[Simplex] Iteració  43 : iout = 7, q = 3, B(p) = 11, theta* = 7.986, z = -7180.387
-[Simplex] Iteració  44 : iout = 0, q = 17, B(p) = 10, theta* = 9719.000, z = -8844.000
+[Simplex] Iteración  20 : iout = 0, q = 10, B(p) = 2, theta* = 0.913, z = -837.041
+[Simplex] Iteración  21 : iout = 9, q = 0, B(p) = 6, theta* = 0.025, z = -837.720
+[Simplex] Iteración  22 : iout = 7, q = 11, B(p) = 12, theta* = 0.548, z = -898.577
+[Simplex] Iteración  23 : iout = 5, q = 6, B(p) = 7, theta* = 2.921, z = -980.937
+[Simplex] Iteración  24 : iout = 6, q = 8, B(p) = 9, theta* = 2.771, z = -1056.027
+[Simplex] Iteración  25 : iout = 8, q = 15, B(p) = 1, theta* = 7.198, z = -1061.789
+[Simplex] Iteración  26 : iout = 8, q = 17, B(p) = 15, theta* = 14.833, z = -1068.162
+[Simplex] Iteración  27 : iout = 1, q = 9, B(p) = 3, theta* = 0.072, z = -1069.721
+[Simplex] Iteración  28 : iout = 2, q = 15, B(p) = 5, theta* = 22.138, z = -1084.688
+[Simplex] Iteración  29 : iout = 4, q = 18, B(p) = 4, theta* = 17.597, z = -1095.132
+[Simplex] Iteración  30 : iout = 3, q = 3, B(p) = 13, theta* = 0.943, z = -1159.115
+[Simplex] Iteración  31 : iout = 9, q = 5, B(p) = 0, theta* = 0.243, z = -1172.019
+[Simplex] Iteración  32 : iout = 9, q = 19, B(p) = 5, theta* = 67.069, z = -1217.695
+[Simplex] Iteración  33 : iout = 3, q = 2, B(p) = 3, theta* = 0.029, z = -1218.078
+[Simplex] Iteración  34 : iout = 3, q = 4, B(p) = 2, theta* = 0.025, z = -1218.938
+[Simplex] Iteración  35 : iout = 3, q = 13, B(p) = 4, theta* = 0.010, z = -1219.005
+[Simplex] Iteración  36 : iout = 3, q = 16, B(p) = 13, theta* = 1.729, z = -1219.817
+[Simplex] Iteración  37 : iout = 6, q = 14, B(p) = 8, theta* = 845.099, z = -1350.485
+[Simplex] Iteración  38 : iout = 1, q = 20, B(p) = 9, theta* = 301.169, z = -1405.698
+[Simplex] Iteración  39 : iout = 5, q = 22, B(p) = 6, theta* = 398.217, z = -1714.294
+[Simplex] Iteración  40 : iout = 1, q = 21, B(p) = 20, theta* = 267.312, z = -1742.182
+[Simplex] Iteración  41 : iout = 8, q = 0, B(p) = 17, theta* = 4.872, z = -1768.731
+[Simplex] Iteración  42 : iout = 8, q = 23, B(p) = 0, theta* = 1748.811, z = -6188.516
+[Simplex] Iteración  43 : iout = 7, q = 3, B(p) = 11, theta* = 7.986, z = -7180.387
+[Simplex] Iteración  44 : iout = 0, q = 17, B(p) = 10, theta* = 9719.000, z = -8844.000
 
-[Simplex] Problema NO ACOTAT: la funció objectiu no té mínim finit.
+[Simplex] Problema NO ACOTADO: la función objetivo no tiene mínimo finito.
 

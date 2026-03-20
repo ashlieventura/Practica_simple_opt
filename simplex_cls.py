@@ -6,8 +6,8 @@ import numpy as np
 
 class Simplex:
     """
-    Implementació del simplex primal en dues fases (Fase I + Fase II).
-    Utilitza la regla de Bland per a la selecció de variables entrants i sortints.
+    Implementación del simplex primal en dos fases (Fase I + Fase II).
+    Utiliza la regla de Bland para la selección de variables entrantes y salientes.
     """
 
     def __init__(
@@ -31,17 +31,17 @@ class Simplex:
         self.z_sol = z_sol
         self.x_sol = x_sol
 
-        self._reset_estat()
+        self._reset_estado()
 
         if self.fitxer is not None and self.num is not None and self.prob is not None:
             self.read_dades(self.num, self.prob, self.fitxer)
 
 
-    # Constructors alternatius ------------------------------------------------
+    # Constructores alternativos ------------------------------------------------
 
     @classmethod
     def from_file(cls, fitxer: str, num: int, prob: int) -> "Simplex":
-        """Crea una instància llegint les dades d'un fitxer de text."""
+        """Crea una instancia leyendo los datos de un fichero de texto."""
         return cls(fitxer=fitxer, num=num, prob=prob)
 
     @classmethod
@@ -53,14 +53,14 @@ class Simplex:
         z_sol: Optional[float] = None,
         x_sol: Optional[list[int]] = None,
     ) -> "Simplex":
-        """Crea una instància a partir dels arrays del problema."""
+        """Crea una instancia a partir de los arrays del problema."""
         return cls(cost=cost, A=A, b=b, z_sol=z_sol, x_sol=x_sol)
 
 
-    # Estat intern -----------------------------------------------------------
+    # Estado interno -----------------------------------------------------------
 
-    def _reset_estat(self) -> None:
-        """Reinicia tots els atributs de resultat abans de cada execució."""
+    def _reset_estado(self) -> None:
+        """Reinicia todos los atributos de resultado antes de cada ejecución."""
         self.x: Optional[np.ndarray] = None
         self.z: Optional[float] = None
         self.estat: Optional[str] = None
@@ -70,64 +70,61 @@ class Simplex:
         self.iteracions: int = 0
         self.iteraciones_log: list[dict] = []
 
-    # -------------------------------------------------------------------------
-    # Resolució principal
-    # -------------------------------------------------------------------------
+
+    # Resolución principal ----------------------------------------------------------------
 
     def solve(self, tol: float = 1e-12) -> None:
         """
-        Executa Fase I + Fase II i desa els resultats a l'objecte.
+        Ejecuta Fase I + Fase II y guarda los resultados en el objeto.
 
-        Retorna: (x, z_o_estat, base_final, B_inv_final, iteracions_fase2)
+        Retorna: (x, z_o_estado, base_final, B_inv_final, iteraciones_fase2)
         """
         if self.cost is None or self.A is None or self.b is None:
-            raise ValueError("Falten dades del problema: cost, A o b són None.")
+            raise ValueError("Faltan datos del problema: cost, A o b son None.")
 
-        self._reset_estat()
+        self._reset_estado()
 
         # --- Fase I ---
-        base, estat_o_B_inv, iter_fase1 = self._fase_inicial(tol=tol)
+        base, estado_o_B_inv, iter_fase1 = self._fase_inicial(tol=tol)
         self.iteracions = iter_fase1
 
-        # Si Fase I detecta infactibilitat o problema no acotat, sortir sense error
-        if isinstance(estat_o_B_inv, str):
-            self.estat = estat_o_B_inv
-            print(f"[Simplex] {estat_o_B_inv}: el problema no té solució factible.")
-            return None, estat_o_B_inv, None, None, iter_fase1
+        # Si Fase I detecta infactibilidad o problema no acotado, salir sin error
+        if isinstance(estado_o_B_inv, str):
+            self.estat = estado_o_B_inv
+            print(f"[Simplex] {estado_o_B_inv}: el problema no tiene solución factible.")
+            return None, estado_o_B_inv, None, None, iter_fase1
 
-        B_inv = estat_o_B_inv  # En cas contrari, és la B_inv
+        B_inv = estado_o_B_inv  # En caso contrario, es la B_inv
 
         # --- Fase II ---
-        x, z_o_estat, base_final, B_inv_final, iter_fase2 = self._simplex_proces(
+        x, z_o_estado, base_final, B_inv_final, iter_fase2 = self._simplex_proces(
             basiques=base,
             inversa=B_inv,
             tol=tol,
         )
 
-        # Desar resultats
+        # Guardar resultados
         self.x = x
         self.base_final = base_final
         self.B_inv_final = B_inv_final
         self.iteracions = iter_fase1 + iter_fase2
 
-        if isinstance(z_o_estat, str):
-            self.estat = z_o_estat
+        if isinstance(z_o_estado, str):
+            self.estat = z_o_estado
             self.z = None
         else:
-            self.estat = "Òptim"
-            self.z = float(z_o_estat)
+            self.estat = "Óptimo"
+            self.z = float(z_o_estado)
 
-        # Costos reduïts finals
+        # Costes reducidos finales
         if self.base_final is not None and self.B_inv_final is not None:
             cost_b = self.cost[self.base_final]
             self.r = self.cost - cost_b @ self.B_inv_final @ self.A
 
-        self._print_resultats(fase="II")
+        self._print_resultados(fase="II")
 
 
-    # -------------------------------------------------------------------------
-    # Algorisme del simplex (nucli)
-    # -------------------------------------------------------------------------
+    # Algoritmo del simplex (núcleo) --------------------------------------------------------------
 
     def _simplex_proces(
         self,
@@ -136,13 +133,13 @@ class Simplex:
         tol: float = 1e-12,
     ) -> tuple:
         """
-        Executa el simplex primal des d'una base factible donada.
-        Utilitza la regla de Bland per desempat.
+        Ejecuta el simplex primal desde una base factible dada.
+        Utiliza la regla de Bland para desempates.
 
-        Retorna: (x_full, z_o_estat, base, B_inv, iteracions_totals)
+        Retorna: (x_full, z_o_estado, base, B_inv, iteraciones_totales)
         """
         if self.cost is None or self.A is None or self.b is None:
-            raise ValueError("Falten dades del problema: cost, A o b són None.")
+            raise ValueError("Faltan datos del problema: cost, A o b son None.")
 
         cost = self.cost
         A = self.A
@@ -155,33 +152,33 @@ class Simplex:
 
         x_B = B_inv @ b.astype(float)
         if np.any(x_B < -tol):
-            raise ValueError("La base inicial no és factible (x_B < 0).")
+            raise ValueError("La base inicial no es factible (x_B < 0).")
 
         iteracio = self.iteracions
 
         while True:
             cost_b = cost[basiques]
 
-            # Costos reduïts de les no bàsiques
+            # Costes reducidos de las no básicas
             r_N = cost[no_basiques] - cost_b @ B_inv @ A[:, no_basiques]
 
-            # Selecció variable entrant (Bland: índex mínim amb r < 0)
-            candidats = [(no_basiques[e], e) for e in range(len(r_N)) if r_N[e] < -tol]
-            if not candidats:
-                break  # Òptim assolit
+            # Selección variable entrante (Bland: índice mínimo con r < 0)
+            candidatos = [(no_basiques[e], e) for e in range(len(r_N)) if r_N[e] < -tol]
+            if not candidatos:
+                break  # Óptimo alcanzado
 
-            entra_col, e = min(candidats, key=lambda t: t[0])
+            entra_col, e = min(candidatos, key=lambda t: t[0])
 
-            # Direcció de descens
+            # Dirección de descenso
             d_B = -(B_inv @ A[:, entra_col])
 
-            # Comprovar no acotat
+            # Comprobar no acotado
             if np.all(d_B >= -tol):
                 x_full = np.zeros(n)
                 x_full[basiques] = x_B
-                return x_full, "No acotat", basiques, B_inv, iteracio
+                return x_full, "No acotado", basiques, B_inv, iteracio
 
-            # Test de la raó (Bland en empats)
+            # Test de la razón (Bland en empates)
             ratios = [
                 (-x_B[i] / d_B[i], basiques[i], i)
                 for i in range(m)
@@ -191,21 +188,21 @@ class Simplex:
 
             var_surt = basiques[p]
 
-            # Actualitzar x_B
+            # Actualizar x_B
             x_B += theta * d_B
             x_B[np.abs(x_B) < tol] = 0.0
             x_B[p] = theta
 
-            # Actualitzar base
+            # Actualizar base
             basiques[p] = entra_col
             no_basiques = sorted(j for j in range(n) if j not in basiques)
 
-            # Valor objectiu actual (per al log)
+            # Valor objetivo actual (para el log)
             x_full = np.zeros(n)
             x_full[basiques] = x_B
             z_actual = float(cost @ x_full)
 
-            # Actualitzar B_inv per pivotació eta
+            # Actualizar B_inv por pivotación eta
             T = np.eye(m)
             T[:, p] = [-d_B[i] / d_B[p] if i != p else -1.0 / d_B[p] for i in range(m)]
             B_inv = T @ B_inv
@@ -220,33 +217,32 @@ class Simplex:
                 "z":        z_actual,
             })
 
-        # Solució òptima
+        # Solución óptima
         x_full = np.zeros(n)
         x_full[basiques] = x_B
         z_val = float(cost @ x_full)
 
         return x_full, z_val, basiques, B_inv, iteracio
 
-    # -------------------------------------------------------------------------
-    # Fase I
-    # -------------------------------------------------------------------------
+
+    # Fase I -------------------------------------------------------
 
     def _fase_inicial(self, tol: float = 1e-12) -> tuple:
         """
-        Construeix i resol el problema de Fase I per trobar una SBF inicial.
+        Construye y resuelve el problema de Fase I para encontrar una SBF inicial.
 
         Retorna:
-          - Si factible:    (base, B_inv, iteracions_fase1)
-          - Si infactible:  (None, "Infactible", iteracions_fase1)
-          - Si no acotat:   (None, "No acotat F1", iteracions_fase1)
+          - Si factible:     (base, B_inv, iteraciones_fase1)
+          - Si infactible:   (None, "Infactible", iteraciones_fase1)
+          - Si no acotado:   (None, "No acotado F1", iteraciones_fase1)
         """
         if self.A is None or self.b is None:
-            raise ValueError("Falten dades del problema: A o b són None.")
+            raise ValueError("Faltan datos del problema: A o b son None.")
 
         A, b = self.A, self.b
         m, n = A.shape
 
-        # Problema auxiliar: min sum(artificials), s.a. [A | I] x = b
+        # Problema auxiliar: min sum(artificiales), s.a. [A | I] x = b
         A_f1 = np.hstack((A, np.eye(m)))
         cost_f1 = np.array([0.0] * n + [1.0] * m)
 
@@ -258,21 +254,20 @@ class Simplex:
             tol=tol,
         )
 
-        # Imprimir log de Fase I abans de retornar
+        # Imprimir log de Fase I antes de retornar
         self.iteraciones_log = aux.iteraciones_log
-        self._print_resultats(fase="I")
+        self._print_resultados(fase="I")
         self.iteraciones_log = []
 
-        if isinstance(z1, str):
-            return None, "No acotat F1", iter_f1
         if float(z1) > tol:
-            return None, "Infactible", iter_f1
+            return None, "Infactible", iter_f1 
+            # En la fase I el problema no puede dar no acotado, por lo tanto no cal contemplar el caso.
 
-        # Eliminar artificials de la base
+        # Eliminar artificiales de la base
         base = list(base_f1)
-        B_inv_f1 = self._eliminar_artificials(base, B_inv_f1, A_f1, n, tol)
+        B_inv_f1 = self._eliminar_artificiales(base, B_inv_f1, A_f1, n, tol)
 
-        # Recomputar B_inv per al problema original (sense artificials)
+        # Recomputar B_inv para el problema original (sin artificiales)
         try:
             B_inv = np.linalg.inv(A[:, base])
         except np.linalg.LinAlgError as e:
@@ -280,11 +275,11 @@ class Simplex:
 
         x_B = B_inv @ b.astype(float)
         if np.any(x_B < -tol):
-            raise ValueError("Base obtinguda després de Fase I no és factible.")
+            raise ValueError("Base obtenida tras la Fase I no es factible.")
 
         return base, B_inv, iter_f1
 
-    def _eliminar_artificials(
+    def _eliminar_artificiales(
         self,
         base: list[int],
         B_inv: np.ndarray,
@@ -293,15 +288,15 @@ class Simplex:
         tol: float,
     ) -> np.ndarray:
         """
-        Intenta substituir les variables artificials que han quedat a la base
-        per variables originals mitjançant pivotació.
+        Intenta sustituir las variables artificiales que han quedado en la base
+        por variables originales mediante pivotación.
         """
         m = len(base)
         for fila in range(m):
             if base[fila] < n:
-                continue  # Ja és una variable original
+                continue  # Ya es una variable original
 
-            # Buscar columna original per pivotar
+            # Buscar columna original para pivotar
             for j in range(n):
                 if j in base:
                     continue
@@ -315,16 +310,15 @@ class Simplex:
                     except np.linalg.LinAlgError:
                         base[fila] = base_ant
             else:
-                raise ValueError("No s'ha pogut eliminar una variable artificial de la base.")
+                raise ValueError("No se ha podido eliminar una variable artificial de la base.")
 
         return B_inv
 
-    # -------------------------------------------------------------------------
-    # Lectura de dades
-    # -------------------------------------------------------------------------
+
+    # Lectura de datos ----------------------------------------------------
 
     def read_dades(self, num: int, prob: int, fitxer: str) -> None:
-        """Llegeix les dades del problema des d'un fitxer de text."""
+        """Lee los datos del problema desde un fichero de texto."""
         with open(fitxer, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
@@ -340,9 +334,8 @@ class Simplex:
         self.z_sol = z_sol
         self.x_sol = x_sol
 
-    # -------------------------------------------------------------------------
-    # Mètodes auxiliars de parsing (privats)
-    # -------------------------------------------------------------------------
+
+    # Métodos auxiliares de parsing (privados) ---------------------------------------------------------------
 
     @staticmethod
     def _extract_ints(line: str) -> list[int]:
@@ -361,7 +354,7 @@ class Simplex:
             normalized = line.replace(" ", "").lower()
             if tag_num in normalized and tag_prob in normalized:
                 return i
-        raise ValueError("No s'ha trobat la secció sol·licitada al fitxer.")
+        raise ValueError("No se ha encontrado la sección solicitada en el fichero.")
 
     def _parse_cost(self, lines: list[str], idx: int) -> tuple[list[int], int]:
         cost: list[int] = []
@@ -370,11 +363,11 @@ class Simplex:
                 cost += self._extract_ints(lines[idx])
             idx += 1
         if idx >= len(lines):
-            raise ValueError("No s'ha trobat el bloc A= després del cost.")
+            raise ValueError("No se ha encontrado el bloque A= después del coste.")
         return cost, idx
 
     def _parse_A(self, lines: list[str], idx: int) -> tuple[list[list[int]], int]:
-        idx += 1  # Saltar la línia "A="
+        idx += 1  # Saltar la línea "A="
         blocks: list[list[list[int]]] = []
         current_block: list[list[int]] = []
 
@@ -391,24 +384,24 @@ class Simplex:
         if current_block:
             blocks.append(current_block)
         if not blocks:
-            raise ValueError("No s'ha pogut llegir cap fila del bloc A=.")
+            raise ValueError("No se ha podido leer ninguna fila del bloque A=.")
 
-        # Concatenar blocs per columnes
+        # Concatenar bloques por columnas
         A = [row[:] for row in blocks[0]]
         for block in blocks[1:]:
             if len(block) != len(A):
-                raise ValueError("Blocs de A amb nombre de files inconsistent.")
+                raise ValueError("Bloques de A con número de filas inconsistente.")
             for i, row_part in enumerate(block):
                 A[i] += row_part
 
         if idx >= len(lines):
-            raise ValueError("No s'ha trobat el bloc b= després de A.")
+            raise ValueError("No se ha encontrado el bloque b= después de A.")
         return A, idx
 
     def _parse_b(self, lines: list[str], idx: int) -> tuple[list[int], int]:
-        idx += 1  # Saltar la línia "b="
+        idx += 1  # Saltar la línea "b="
         if idx >= len(lines):
-            raise ValueError("Falta la línia amb el vector b.")
+            raise ValueError("Falta la línea con el vector b.")
         b = self._extract_ints(lines[idx])
         return b, idx + 1
 
@@ -434,16 +427,15 @@ class Simplex:
 
         return z_sol, x_sol
 
-    # -------------------------------------------------------------------------
-    # Impressió de resultats
-    # -------------------------------------------------------------------------
 
-    def _print_resultats(self, fase: str = "II") -> None:
-        """Imprimeix el log d'iteracions i, si és Fase II, la solució òptima."""
+    # Impresión de resultados -------------------------------------------------------
+
+    def _print_resultados(self, fase: str = "II") -> None:
+        """Imprime el log de iteraciones y, si es Fase II, la solución óptima."""
         print(f"[Simplex] Fase {fase}")
         for log in self.iteraciones_log:
             print(
-                f"[Simplex] Iteració {log['iteracio']:3d} : "
+                f"[Simplex] Iteración {log['iteracio']:3d} : "
                 f"iout = {log['iout']}, "
                 f"q = {log['q']}, "
                 f"B(p) = {log['B_p']}, "
@@ -452,18 +444,18 @@ class Simplex:
             )
 
         if fase == "II":
-            if self.estat == "No acotat":
-                print("\n[Simplex] Problema NO ACOTAT: la funció objectiu no té mínim finit.")
+            if self.estat == "No acotado":
+                print("\n[Simplex] Problema NO ACOTADO: la función objetivo no tiene mínimo finito.")
             elif self.estat == "Infactible":
-                print("\n[Simplex] Problema INFACTIBLE: no existeix solució factible.")
-            elif self.estat == "Òptim" and self.base_final is not None and self.r is not None:
-                print("\nSolució òptima:")
+                print("\n[Simplex] Problema INFACTIBLE: no existe solución factible.")
+            elif self.estat == "Óptimo" and self.base_final is not None and self.r is not None:
+                print("\nSolución óptima:")
                 print(f"  vb = {' '.join(map(str, self.base_final))}")
                 print(f"  xb = {' '.join(f'{v:.4f}' for v in self.x[self.base_final])}")
                 print(f"  z  = {self.z:.4f}")
                 print(f"  r  = {' '.join(f'{v:.4f}' for v in self.r)}")
 
                 if self.z_sol is not None or self.x_sol is not None:
-                    print("\nSolució esperada (del fitxer):")
+                    print("\nSolución esperada (del fichero):")
                     print(f"  z* = {self.z_sol}")
                     print(f"  vb*= {self.x_sol}")
